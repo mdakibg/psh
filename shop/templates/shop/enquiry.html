@@ -1,0 +1,197 @@
+{% extends 'shop/layout.html' %}
+
+{% block title %}
+  Enquiry
+{% endblock %}
+
+{% block css %}
+<style>
+    #cart, #nav-cart {
+        color: #fff !important;
+    }
+</style>
+{% endblock %}
+
+{% block main %}
+
+    <div class="container">
+        {% if alert %}
+            {% for message in messages %}
+            <div class="alert alert-{{alert}} text-center my-2" role="alert">
+                {{ message }}
+            </div>
+            {% endfor %}
+        {% else %}
+            {% for message in messages %}
+            <div class="toast custom-toast" role="alert" aria-live="assertive" aria-atomic="true" data-autohide="true" data-delay="4000">
+                <div class="toast-body">
+                    {{ message }}
+                    <button type="button" class="ml-2 mb-1 close" data-dismiss="toast" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+            </div>
+            {% endfor %}
+        {% endif %}
+        <div class="col my-4">
+            <h4>Step 1 - Premium Stone Handicrafts Enquiry - Review Your Cart Items</h4>
+            <div class="my-4">
+                <table class="table">
+                    {% if request.session.cart|length == 0 %}
+                        <div class="alert alert-danger" role="alert">
+                            Your cart is empty, please add some items to your cart before checking out! To See products 
+                            <a href="{% url 'shop:products' 'all' 'none' %}">click here</a>.
+                        </div>
+
+                    {% else %}
+                        <div style="float: right;"><a href="{% url 'shop:cart_clear' %}" type="button" class="btn btn-danger btn-sm" style="width: 10rem;" onclick="return confirm('Confirm to Clear Cart!');">Clear Cart</a></div>
+
+                        <thead>
+                            <th colspan="1"></th>
+                            <th>Name</th>
+                            <th>Quantity</th>
+                            <th>Total</th>
+                            <th colspan="1"></th>
+                        </thead>
+
+                        {% load cart_tag %}
+                        {% for key,value in request.session.cart.items %}
+                            <div>
+                                <tbody>
+                                    <tr>
+                                    <td style="width: fit-content;">
+                                        <a href="{% url 'shop:single_product' value.product_id %}"><img src="{{value.image}}" alt="" style="width: 3rem; height: 3rem;"></a>
+                                    </td>
+                                    <td>
+                                        <b>{{value.name}}</b> (&#8377;{{value.price}}/p)
+                                    </td>
+                                    <td>
+                                        <span>
+                                            <form action="{% url 'shop:enquiry' %}" method="post" style="display: unset;">
+                                                {% csrf_token %}
+                                                <select name="quantity" id="quantity{{value.product_id}}" onchange="this.form.submit()">
+                                                    <option value="{{ value.product_id }}-1">1</option>
+                                                    <option value="{{ value.product_id }}-2">2</option>
+                                                    <option value="{{ value.product_id }}-5">5</option>
+                                                    <option value="{{ value.product_id }}-10">10+</option>
+                                                    <option value="{{ value.product_id }}-20">20+</option>
+                                                    <option value="{{ value.product_id }}-50">50+</option>
+                                                    <option value="{{ value.product_id }}-100">100+</option>
+                                                    <option value="{{ value.product_id }}-200">200+</option>
+                                                    <option value="{{ value.product_id }}-500">500+</option>
+                                                </select>
+                                            </form>
+                                        </span>
+                                    </td>
+                                    <td>
+                                        &#8377; {{ value.price|multiply:value.quantity }}/-
+                                    </td>
+                                    <td>
+                                        <span style="float: right;"><a href="{% url 'shop:item_clear' value.product_id %}" class="fas fa-times-circle"></a></span>
+                                    </td>
+                                </tr>
+                                </tbody>
+                            </div>
+                        <!--    {{value.price}} {{value.quantity}} {{value.image}} Total {{ value.price|multiply:value.quantity }}  -->
+                        {% endfor %}
+
+                    {% endif %}
+                </table>
+
+                <nav aria-label="breadcrumb">
+                    <ol class="breadcrumb mt-3">
+                        <li class="breadcrumb-item active" aria-current="page">Your Cart Total Is <b>Rs. <span id="totalPrice"></span></b>. Enter your details below & submit your enquiry to get best price. Thanks for using Premium Stone Handicrafts!</li>
+                    </ol>
+                </nav>
+            </div>
+        </div>
+
+        <div class="col my-4">
+            <h4>Step 2 - Enter Address & Other Details:</h4>
+            <form method="post" action="{% url 'shop:enquiry' %}">
+                {% csrf_token %}
+                <input type="hidden" name="amount" id="amount">
+                <div class="form-row">
+                    <div class="form-group col-md-6">
+                        <label for="inputname">Name</label>
+                        <input type="text" class="form-control" id="name" name="name" placeholder="Name" required>
+                    </div>
+                    <div class="form-group col-md-6">
+                        <label for="inputEmail4">Email</label>
+                        <input type="email" class="form-control" id="email" name="email" placeholder="Email" required>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="inputAddress">Address</label>
+                    <input type="text" class="form-control" id="address1" name="address1" placeholder="1234 Main St" required>
+                </div>
+                <div class="form-group">
+                    <label for="inputAddress2">Address line 2</label>
+                    <input type="text" class="form-control" id="address2" name="address2" placeholder="Apartment, studio, or floor">
+                </div>
+                <div class="form-row">
+                    <div class="form-group col-md-6">
+                        <label for="inputCity">City</label>
+                        <input type="text" class="form-control" id="city" name="city" placeholder="Enter City" required>
+                    </div>
+                    <div class="form-group col-md-4">
+                        <label for="inputState">State</label>
+                        <input type="text" class="form-control" id="state" name="state"  placeholder="Enter State" required>
+                    </div>
+                    <div class="form-group col-md-2">
+                        <label for="inputZip">Zip</label>
+                        <input type="text" class="form-control" id="zip_code" name="zip_code" pattern="[0-9]{6}" required>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="inputZip">Phone Number</label>
+                    <div class="input-group mb-3">
+                        <div class="input-group-prepend">
+                          <span class="input-group-text" id="basic-addon1">+91</span>
+                        </div>
+                        <input type="tel" class="form-control" id="phone" name="phone" pattern="[0-9]{10}" placeholder="Enter Phone Number" required>
+                    </div>
+                </div>
+                <button type="submit" class="btn btn-primary" onclick="return confirm('Submit Enquiry!');">Submit Enquiry</button>
+            </form>
+        </div>
+    </div>
+
+{% endblock %}
+
+{% block javascript %}
+
+<script type="text/javascript">
+
+    function setOptionSelected(element, val) {
+        var option;
+        for ( var i = 0, len = element.options.length; i < len; i++ ) {
+            option = element.options[i];
+            if ( option.value == val ) {
+                option.selected = 'selected';
+                break;
+            }
+        }
+    }
+
+    {% load cart_tag %}
+    {% for key,value in request.session.cart.items %}
+        setOptionSelected(document.getElementById('quantity{{value.product_id}}'), "{{ value.product_id }}-{{ value.quantity }}");
+    {% endfor %}
+
+    function setTotalAmount() {
+        var total = 0.0;
+
+        {% for key,value in request.session.cart.items %}
+            total = total + {{ value.price|multiply:value.quantity }}
+        {% endfor %}
+
+        document.getElementById("totalPrice").innerText = total
+        document.getElementById("amount").value = total
+    }
+
+    setTotalAmount();
+
+</script>
+
+{% endblock %}

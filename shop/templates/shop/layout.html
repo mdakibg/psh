@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css" integrity="sha384-GJzZqFGwb1QTTN6wy59ffF1BuGJpLSa9DkKMp0DgiMDm4iYMj70gZWKYbI706tWS" crossorigin="anonymous">
+
+    <!-- Owl Carousel css-->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/assets/owl.carousel.min.css" integrity="sha512-tS3S5qG0BlhnQROyJXvNjeEM4UpMXHrQfTGmbQ1gKmelCxlSEBUaxhRBj/EFTzpbP4RVSrpEikbmdJobCvhE3g==" crossorigin="anonymous" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/assets/owl.theme.default.min.css" integrity="sha512-sMXtMNL1zRzolHYKEujM2AqCLUR9F2C4/05cdbxjjLSRvMQIciEPCQZo++nk7go3BtSuK9kfa/s+a4f4i5pLkw==" crossorigin="anonymous" />
+
+    <!-- JQuery -->
+    <script src="https://code.jquery.com/jquery-3.3.1.js" integrity="sha256-2Kok7MbOyxpgUVvAk/HJ2jigOSYS2auK4Pfzbm7uH60=" crossorigin="anonymous"></script>
+
+    <!-- Optional JavaScript -->
+    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.6/umd/popper.min.js" integrity="sha384-wHAiFfRlMFy6i5SRaxvfOCifBUQy1xHdJ/yoi7FRNXMRBu5WHdZYu1hA6ZOblgut" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/js/bootstrap.min.js" integrity="sha384-B0UglyR+jN6CkvvICOB2joaf5I4l3gm9GU6Hc1og6Ls7i6U/mkkaduKaBhlAXv9k" crossorigin="anonymous"></script>
+
+    <!-- Font Awesome -->
+    <script src="https://kit.fontawesome.com/fc81595e4c.js" crossorigin="anonymous"></script>
+
+    <!--Owl Carousel Js-->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/owl.carousel.min.js" integrity="sha512-bPs7Ae6pVvhOSiIcyUClR7/q2OAsRiovw4vAkX+zJbw3ShAeeqezq50RIIcIURq7Oa20rW2n2q+fyXBNcU9lrw==" crossorigin="anonymous"></script>
+
+    <!-- custom css file link  -->
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'shop/css/style.css' %}">
+
+    <!-- Favicon -->
+    <link rel="shortcut icon" href="" type="image/x-icon">
+
+    <!-- custom javascript file link  -->
+    <script src="{% static 'shop/js/script.js' %}"></script>
+
+    <title>PSH | {% block title %}{% endblock %}</title>
+    {% block css %}{% endblock %}
+  </head>
+
+  <body>
+    {% load static %}
+    <!-- header section starts  -->
+    <nav class="navbar fixed-top navbar-expand-lg navbar-dark menu-bar">
+      <a class="navbar-brand" href="{% url 'shop:index' %}">
+        <img src="{% static 'shop/image/hg14.0.jpeg' %}" width="30" height="30" class="d-inline-block align-top" alt="Logo">
+        PSH
+      </a>
+      <a id="nav-cart" class="navbar-toggler nav-cart" href="{% url 'shop:enquiry' %}">
+        <span class="fa fa-shopping-cart">({{request.session.cart|length}})</span>
+      </a>
+      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="fa fa-bars"></span>
+      </button>
+    
+      <div class="collapse navbar-collapse" id="navbarSupportedContent">
+        <ul class="navbar-nav ml-auto">
+          <li class="nav-item">
+            <form method='get' action='{% url "shop:search" %}' class="form-inline my-2 my-lg-0 ml-auto search">
+              {% csrf_token %}
+              <input class="form-control mr-sm-2 text-input" type="search" placeholder="Search" aria-label="Search" name="search" id="search">
+              <button class="search-btn fas fa-search" type="submit"></button>
+            </form>
+          </li>
+          <li class="nav-item active">
+            <a id="home" class="nav-link" href="{% url 'shop:index' %}">Home</a>
+          </li>
+          <li class="nav-item">
+            <a id="products" class="nav-link" href="{% url 'shop:products' 'all' 'none' %}">Products</a>
+          </li>
+          <li class="nav-item">
+            <a id="about" class="nav-link" href="{% url 'shop:about' %}">About Us</a>
+          </li>
+    
+          <li class="nav-item">
+            <a id="contact" class="nav-link" href="{% url 'shop:contact' %}">Contact Us</a>
+          </li>
+          <li class="nav-item cart-item">
+            <a id="cart" class="fas fa-shopping-cart cart" href="{% url 'shop:enquiry' %}">({{request.session.cart|length}})</a>
+          </li>
+        </ul>
+      </div>
+    </nav>
+    <!-- header section ends -->
+
+
+    <div class="behind-navbar" style="height: 62px;"></div>
+    {% block main %}
+    {% endblock %}
+
+    <!-- Footer Section -->
+    <footer>
+      <div class="container">
+        <div class="section about">
+          <h3>Premium Stone Handicrafts</h3>
+          <p>Saldjsf lkdsfjioej lajeiao wel ajffj asje fiajfewfjiwafje;wo fjas ifawj foewljf oewfjej fontawesome
+            oaejf oje;fawjeifjaw feif oaeow fwaijeofwje ofjaeja;oefaj es e;o wae ifawj foewljf oewfjej fontawesome
+          </p>
+          <ul class="section-icons">
+            <li><a href=""><i class="fa fa-facebook"></i></a></li>
+            <li><a href=""><i class="fa fa-instagram"></i></a></li>
+            <li><a href=""><i class="fa fa-whatsapp"></i></a></li>
+          </ul>
+          <p>
+            <a href="mailto:premiumstonehandicrafts@gmail.com"><i class="fa fa-envelope"></i> premiumstonehandicrafts@gmail.com</a><br>
+          </p>
+        </div>
+        <div class="section quicklinks">
+          <h3>Quick Links</h3>
+          <ul>
+            <li><a href="{% url 'shop:about' %}">About</a></li>
+            <li><a href="#">Shipping Rates</a></li>
+            <li><a href="#">Return Policy</a></li>
+            <li><a href="{% url 'shop:contact' %}">Help</a></li>
+          </ul>
+        </div>
+        <div class="section contact">
+          <h3>Contact Info</h3>
+          <ul class="info">
+            <li>
+              <span><i class="fa fa-map-marker"></i></span>
+              <span>Makrana, Dist-Nagaur<br>
+                Rajasthan - 341505,<br>INDIA              
+              </span>
+            </li>
+            <li>
+              <span><i class="fa fa-phone"></i></span>
+              <p>
+                <a href="tel:+918005803671">+91 8005803671</a><br>
+                <a href="tel:+917014435201">+91 7014435201</a><br>
+                <a href="tel:+919829236536">+91 9829236536</a>
+              </p>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </footer>
+    <div class="copyright">
+      <p>Copyright &copy; <span><script>document.write(new Date().getFullYear())</script></span>
+        Premium Stone Handicrafts. All Rights Reserved.
+      </p>
+    </div>
+    <!--End Footer Section -->
+
+  </body>
+</html>
+
+{% block javascript %}
+{% endblock %}

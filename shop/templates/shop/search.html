@@ -1,0 +1,49 @@
+{% extends 'shop/layout.html' %}
+
+{% block title %}
+  Search Results
+{% endblock %}
+
+{% block main %}
+
+    <div class="container body-container">
+        <h2 class="my-4">Search Results</h2>
+        <hr>
+        {% if alert %}
+            {% for message in messages %}
+                <div class="alert alert-{{alert}} text-center my-2" role="alert">
+                    {{ message }}
+                </div>
+            {% endfor %}
+        {% else %}
+            {% for message in messages %}
+            <div class="toast custom-toast" role="alert" aria-live="assertive" aria-atomic="true" data-autohide="true" data-delay="4000">
+                <div class="toast-body">
+                    {{ message }}
+                    <button type="button" class="ml-2 mb-1 close" data-dismiss="toast" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+            </div>
+            {% endfor %}
+            <div class="row">
+                {% for product in products %}
+                    <div class="col-xs-6 col-sm-4 col-md-3 product-grid">
+                        <div class="image">
+                            <a href="{% url 'shop:single_product' product.id %}">
+                                <img src="{{ product.image.url }}" alt="product image" class="w-100">
+                                <div class="overlay">
+                                    <div class="detail">View Detail</div>
+                                </div>
+                            </a>
+                        </div>
+                        <p class="text-center title">{{ product.name }}</p>
+                        <p class="text-center"><b>&#8377; {{ product.price }}</b></p>
+                        <a href="{% url 'shop:cart_add' product.id %}" class="btn btn-cart">Add to Cart</a>
+                    </div>
+                {% endfor %}
+            </div>
+        {% endif %}
+    </div>
+
+{% endblock %}

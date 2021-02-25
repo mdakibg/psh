@@ -1,0 +1,50 @@
+{% extends 'shop/layout.html' %}
+
+{% block title %}
+  About Us
+{% endblock %}
+
+{% block css %}
+<style>
+    #about {
+        color: #fff !important;
+        border-bottom: 1px solid #fff;
+    }
+</style>
+{% endblock %}
+
+{% block main %}
+{% load static %}
+
+    <main role="main">
+
+        <!-- Main jumbotron for a primary marketing message or call to action -->
+        <div class="jumbotron" style="border-top-left-radius: 0; border-top-right-radius: 0; color: white; font-weight: 500; background-size: cover; background-repeat: no-repeat; background-image: url({% static 'shop/image/img4.jpg' %});">
+            <div class="container">
+                <div class="about-brand my-4">
+                    <img src="{% static 'shop/image/hg14.0.jpeg' %}" width="100" height="100" alt="Logo">
+                    <h1 class="display-3 about-brand-name" style="display: unset; vertical-align: middle;">Premium Stone Handicrafts</h1>
+                </div>
+                <p>
+                    PSH is established in the World Famous Marble City of Makrana in Rajastha, India.
+                    We are one of the leading handicrafts manufacturers, it is only through our top quality product we have made a name in the stone handicraft business.
+                    At premium stone handicrafts you will find the most elegant and supremely artistic home decor & other handicraft items.
+                    We take our product quality very seriously and procure the best quality stone.
+                    We also use the "Makrana Marble" (the marble used for the construction of Taj Mahal) to craft some of our products.
+                </p>
+            </div>
+        </div>
+    
+        <div class="container my-5">
+            <p class="about-p1 border-top-left">
+                We provide a huge range of products that encompassed your needs and all of our handicraft collections are crafted & carved by skilled craftsmen with best quality raw materials. Our products includes Home Mandirs, Wash Basins, Decorative Articles,  Kitchen Wares, Home Decor, Fountains, Flower Pots & Vases and many more
+                started its activities in the field of domestic and export market with the cooperation of Arad Holding, to expand its activities throughout the cities of  India, neighboring countries and the world market.
+            </p>
+            <p class="about-p2 border-bottom-right">
+                We believe in delivering our customer the best possible experience. Customer service is one of the main concerns of our business and based on this, all of our efforts are done to fulfill customer satisfaction and provide best experience to our customers.
+            </p>
+        </div>
+    
+    </main>
+
+{% endblock %}
