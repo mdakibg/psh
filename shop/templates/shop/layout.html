@@ -31,7 +31,7 @@
     <link rel="stylesheet" href="{% static 'shop/css/style.css' %}">
 
     <!-- Favicon -->
-    <link rel="shortcut icon" href="" type="image/x-icon">
+    <link rel="shortcut icon" href="{% static 'shop/image/icon.png' %}" type="image/x-icon">
 
     <!-- custom javascript file link  -->
     <script src="{% static 'shop/js/script.js' %}"></script>
@@ -45,8 +45,8 @@
     <!-- header section starts  -->
     <nav class="navbar fixed-top navbar-expand-lg navbar-dark menu-bar">
       <a class="navbar-brand" href="{% url 'shop:index' %}">
-        <img src="{% static 'shop/image/hg14.0.jpeg' %}" width="30" height="30" class="d-inline-block align-top" alt="Logo">
-        PSH
+        <img src="{% static 'shop/image/logo1.png' %}" height="40" class="d-inline-block align-top" alt="Logo">
+        <span>Premium Stone Handicrafts</span>
       </a>
       <a id="nav-cart" class="navbar-toggler nav-cart" href="{% url 'shop:enquiry' %}">
         <span class="fa fa-shopping-cart">({{request.session.cart|length}})</span>
@@ -54,7 +54,7 @@
       <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
         <span class="fa fa-bars"></span>
       </button>
-    
+
       <div class="collapse navbar-collapse" id="navbarSupportedContent">
         <ul class="navbar-nav ml-auto">
           <li class="nav-item">
@@ -73,7 +73,7 @@
           <li class="nav-item">
             <a id="about" class="nav-link" href="{% url 'shop:about' %}">About Us</a>
           </li>
-    
+
           <li class="nav-item">
             <a id="contact" class="nav-link" href="{% url 'shop:contact' %}">Contact Us</a>
           </li>
@@ -86,7 +86,7 @@
     <!-- header section ends -->
 
 
-    <div class="behind-navbar" style="height: 62px;"></div>
+    <div class="behind-navbar" style="height: 66px;"></div>
     {% block main %}
     {% endblock %}
 
@@ -95,13 +95,14 @@
       <div class="container">
         <div class="section about">
           <h3>Premium Stone Handicrafts</h3>
-          <p>Saldjsf lkdsfjioej lajeiao wel ajffj asje fiajfewfjiwafje;wo fjas ifawj foewljf oewfjej fontawesome
-            oaejf oje;fawjeifjaw feif oaeow fwaijeofwje ofjaeja;oefaj es e;o wae ifawj foewljf oewfjej fontawesome
+          <p>
+            At premium stone handicrafts you will find the most elegant and supremely artistic home decor & other handicraft items.
+            We take our product quality very seriously and procure the best quality stone.
           </p>
           <ul class="section-icons">
-            <li><a href=""><i class="fa fa-facebook"></i></a></li>
-            <li><a href=""><i class="fa fa-instagram"></i></a></li>
-            <li><a href=""><i class="fa fa-whatsapp"></i></a></li>
+            <li><a href="https://m.facebook.com/premiumstonehandicrafts" target="_blank"><i class="fa fa-facebook"></i></a></li>
+            <li><a href="https://www.instagram.com/premiumstonehandicrafts/" target="_blank"><i class="fa fa-instagram"></i></a></li>
+            <li><a href="tel:+918005803671"><i class="fa fa-whatsapp"></i></a></li>
           </ul>
           <p>
             <a href="mailto:premiumstonehandicrafts@gmail.com"><i class="fa fa-envelope"></i> premiumstonehandicrafts@gmail.com</a><br>
@@ -122,7 +123,7 @@
             <li>
               <span><i class="fa fa-map-marker"></i></span>
               <span>Makrana, Dist-Nagaur<br>
-                Rajasthan - 341505,<br>INDIA              
+                Rajasthan - 341505,<br>INDIA
               </span>
             </li>
             <li>

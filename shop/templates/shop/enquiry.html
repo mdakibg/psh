@@ -39,7 +39,7 @@
                 <table class="table">
                     {% if request.session.cart|length == 0 %}
                         <div class="alert alert-danger" role="alert">
-                            Your cart is empty, please add some items to your cart before checking out! To See products 
+                            Your cart is empty, please add some items to your cart before checking out! To See products
                             <a href="{% url 'shop:products' 'all' 'none' %}">click here</a>.
                         </div>
 
@@ -70,15 +70,12 @@
                                             <form action="{% url 'shop:enquiry' %}" method="post" style="display: unset;">
                                                 {% csrf_token %}
                                                 <select name="quantity" id="quantity{{value.product_id}}" onchange="this.form.submit()">
-                                                    <option value="{{ value.product_id }}-1">1</option>
-                                                    <option value="{{ value.product_id }}-2">2</option>
-                                                    <option value="{{ value.product_id }}-5">5</option>
-                                                    <option value="{{ value.product_id }}-10">10+</option>
-                                                    <option value="{{ value.product_id }}-20">20+</option>
-                                                    <option value="{{ value.product_id }}-50">50+</option>
-                                                    <option value="{{ value.product_id }}-100">100+</option>
-                                                    <option value="{{ value.product_id }}-200">200+</option>
-                                                    <option value="{{ value.product_id }}-500">500+</option>
+                                                    <option value="{{ value.product_id }}-{{ value.minbuy }}">{{ value.minbuy }}</option>
+                                                    {% for option in quantity_options %}
+                                                        {% if option > value.minbuy %}
+                                                            <option value="{{ value.product_id }}-{{ option }}">{{ option }}</option>
+                                                        {% endif %}
+                                                    {% endfor %}
                                                 </select>
                                             </form>
                                         </span>

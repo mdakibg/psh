@@ -4,9 +4,9 @@ $(document).ready(function() {
         margin:10,
         nav:false,
         dots:false,
-        autoplay:true,
-        autoplayTimeout: 2000,
         stagePadding:100,
+        autoplay:true,
+        autoplayTimeout:7000,
         autoplayHoverPause:true,
         responsive:{
             0:{

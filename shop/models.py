@@ -24,6 +24,13 @@ class Product(models.Model):
     featured = models.BooleanField(default=False)
     minbuy = models.IntegerField(default=1)
 
+    def delete(self, *args, **kwargs):
+        self.image.delete()
+        super().delete(*args, **kwargs)
+
+class ProductImage(models.Model):
+    imageId = models.IntegerField()
+    image = models.ImageField(upload_to="shop/products/images")
 
     def delete(self, *args, **kwargs):
         self.image.delete()

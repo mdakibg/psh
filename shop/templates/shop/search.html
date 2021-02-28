@@ -37,7 +37,8 @@
                                 </div>
                             </a>
                         </div>
-                        <p class="text-center title">{{ product.name }}</p>
+                        <p class="text-center title"><b>{{ product.name }}</b></p>
+                        <p class="text-center">Size: {{ product.size }}</p>
                         <p class="text-center"><b>&#8377; {{ product.price }}</b></p>
                         <a href="{% url 'shop:cart_add' product.id %}" class="btn btn-cart">Add to Cart</a>
                     </div>

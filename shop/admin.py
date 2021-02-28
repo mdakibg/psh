@@ -1,5 +1,5 @@
 from django.contrib import admin
-from .models import Product, Contact, Enquiry
+from .models import Product, Contact, Enquiry, ProductImage
 
 # Register your models here.
 class ProductAdmin(admin.ModelAdmin):
@@ -11,6 +11,10 @@ class ContactAdmin(admin.ModelAdmin):
 class EnquiryAdmin(admin.ModelAdmin):
     list_display = ('name', 'phone', 'city', 'state' , 'amount', 'created_at', 'updated_at')
 
+class ProductImageAdmin(admin.ModelAdmin):
+    list_display = ('imageId', 'image')
+
 admin.site.register(Product, ProductAdmin)
 admin.site.register(Contact, ContactAdmin)
 admin.site.register(Enquiry, EnquiryAdmin)
+admin.site.register(ProductImage, ProductImageAdmin)
